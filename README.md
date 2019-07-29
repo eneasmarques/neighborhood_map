@@ -16,7 +16,6 @@
   $ yarn
 ```
 
-
 ## Instruções
 
 ### Executando o projeto
