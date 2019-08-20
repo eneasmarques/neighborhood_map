@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import foursquare from 'react-foursquare';
+
 import Map from '../../components/Map/index';
 import Search from '../../components/Search/index';
+import Message from '../../components/Message/index';
 
 import { Container } from './styles';
 
 // Chaves de acesso para API do Foursquare
 const foursquareKey = foursquare({
   clientID: 'B0QA5HQ0KEEUZKX34G520CVXTHX23KVEETRLCH0X24OWDSHV',
-  clientSecret: 'A3GWKPFJ14VIZCAUK5Z2G1LBDZJZSRWPX4ZLGSCVCHL3YTPQ',
+  clientSecret: 'Y3CX4R5CFIN0I5HID0ZE3JHH40XWYRMD1SDADFWZSE4S2DUS',
 });
 
 // Chave de acesso a API do Google Maps
-const googleMapkey = 'AIzaSyA6GiAPowpeNwksUFnXkfNJN9Awtt2STic';
+const googleMapkey = 'AIzaSyC8oxfrxUgBRP1itft8aRDZ7hZZWHzr6jk';
 
 // Valores iniciar de latitude e longitude
 const lat = -2.7963467;
@@ -41,11 +43,9 @@ export default class Main extends Component {
         // seja mostrado para o usuário
         if (errorType) {
           this.setState({
-            error: `
-            Code:${code}
+            msg: `Code:${code}
             Type:${errorType}
-            Detail:${errorDetail}
-            `,
+            Detail:${errorDetail}`,
           });
           return;
         }
@@ -73,8 +73,16 @@ export default class Main extends Component {
       })
       .catch(error => {
         console.log('error:', error.message);
-        this.setState({ isLoaded: false, error: error.message });
+        this.setState({ isLoaded: false, msg: error.message });
       });
+    window.gm_authFailure = () => {
+      console.log('Érorororoor', window);
+
+      this.setState({
+        isLoaded: false,
+        msg: 'Google Maps JavaScript API error: InvalidKeyMapError',
+      });
+    };
   }
 
   // altera o valor do estado do lugar enviado como parâmetro
@@ -103,19 +111,19 @@ export default class Main extends Component {
         }),
       };
     });
-
     this.setState({ markers: updateMarkers });
   };
 
   render() {
-    const { markers, isLoaded, error } = this.state;
+    const { markers, isLoaded } = this.state;
 
-    // caso exita erro o valor será mostrado para usuário
-    // não existindo erro a msg padrão será mostrada
-    const msg = error && error.length > 0 ? error : 'Loading...';
+    const msg =
+      this.state.msg && this.state.msg.length > 0
+        ? this.state.msg
+        : 'Loading...';
 
     return !isLoaded ? (
-      <h1>{msg}</h1>
+      <Message msg={msg} />
     ) : (
       <Container>
         <Search
