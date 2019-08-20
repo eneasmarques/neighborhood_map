@@ -20,8 +20,6 @@ const MapContent = withScriptjs(
 export default function Map(props) {
   const { googleMapURL, defaultCenter, defaultZoom, markers, showInfo } = props;
 
-  console.log('Map:'.padEnd(10), typeof showInfo);
-
   return (
     <MapContent
       googleMapURL={googleMapURL}

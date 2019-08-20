@@ -65,10 +65,10 @@ export default class Search extends Component {
           value={search}
         />
 
-        {showPlace &&
-          places.length > 0 &&
-          places.map(marker => (
-            <ul>
+        <ul>
+          {showPlace &&
+            places.length > 0 &&
+            places.map(marker => (
               <li
                 key={marker.id}
                 onClick={() => this.showInfo(marker)}
@@ -78,8 +78,8 @@ export default class Search extends Component {
                 <FaMapMarkerAlt />
                 {marker.name}
               </li>
-            </ul>
-          ))}
+            ))}
+        </ul>
       </Container>
     );
   }

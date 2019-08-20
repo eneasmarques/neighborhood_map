@@ -5,7 +5,6 @@ import { Info } from './styles';
 export default class MapMarker extends Component {
   render() {
     const { markers, showInfo } = this.props;
-    console.log('MapMarker:'.padEnd(20), typeof showInfo, this.props);
 
     return (
       markers &&

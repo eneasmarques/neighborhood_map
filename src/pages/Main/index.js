@@ -14,7 +14,7 @@ const foursquareKey = foursquare({
 });
 
 // Chave de acesso a API do Google Maps
-const googleMapkey = 'AIzaSyC8oxfrxUgBRP1itft8aRDZ7hZZWHzr6jk';
+const googleMapkey = 'AIzaSyDfVA8W2Ve5ez6bOxJPgPini3K3H8loSQ4';
 
 // Valores iniciar de latitude e longitude
 const lat = -2.7963467;
@@ -72,15 +72,12 @@ export default class Main extends Component {
         this.setState({ markers, isLoaded: true });
       })
       .catch(error => {
-        console.log('error:', error.message);
         this.setState({ isLoaded: false, msg: error.message });
       });
     window.gm_authFailure = () => {
-      console.log('Érorororoor', window);
-
       this.setState({
         isLoaded: false,
-        msg: 'Google Maps JavaScript API error: InvalidKeyMapError',
+        msg: 'Google Maps JavaScript API error.',
       });
     };
   }
@@ -103,7 +100,8 @@ export default class Main extends Component {
   // recebe lista de lugares pesquisados
   // mostra apenas os lugares enviados como parâmetro
   showMarker = searchMarkers => {
-    const updateMarkers = this.state.markers.map(marker => {
+    const { markers } = this.state;
+    const updateMarkers = markers.map(marker => {
       return {
         ...marker,
         isOpenMarker: !!searchMarkers.find(searchMarker => {

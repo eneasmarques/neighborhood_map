@@ -36,16 +36,14 @@ export const Container = styled.div`
 
   li {
     padding: 10px;
-    border-radius: 8px;
     cursor: pointer;
   }
 
   li:focus {
-    color: #aaa;
+    background: rgb(0, 0, 0, 0.1);
   }
 
-  li:mouse svg {
-    color: #555;
+  li svg {
     margin: 0 10px;
     vertical-align: text-bottom;
   }
