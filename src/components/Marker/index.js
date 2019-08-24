@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Marker, InfoWindow } from 'react-google-maps';
 import { Info } from './styles';
+/* global google */
 
 export default class MapMarker extends Component {
   render() {
@@ -18,6 +19,7 @@ export default class MapMarker extends Component {
                 lng: marker.location.lng,
               }}
               onClick={() => showInfo(marker)}
+              animation={marker.isOpenInfo && google.maps.Animation.BOUNCE}
               tabIndex={0}
             >
               {marker.isOpenInfo && (
